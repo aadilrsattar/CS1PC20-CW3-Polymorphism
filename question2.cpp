@@ -50,14 +50,16 @@ class divi :public calculator {
 public:
 
     //has function ans and executes it to divides num1 by num2
-    float ans() {
+    float ans() 
+    {
         return num1 / num2;
     }
 };
 
 //sourced from "https://stackoverflow.com/questions/447206/c-isfloat-function/57163016"
 //this is the function to make sure a number is a float
-bool isFloat(string myString) {
+bool isFloat(string myString) 
+{
     std::istringstream iss(myString);
     float f;
     iss >> noskipws >> f; // noskipws considers leading whitespace invalid
@@ -65,7 +67,8 @@ bool isFloat(string myString) {
     return iss.eof() && !iss.fail();
 }
 
-float main() {
+float main() 
+{
 
     //converts the class' in to local variables to be used in main()
     calculator cal;
@@ -81,7 +84,8 @@ float main() {
     string choice;
 
     //this takes the input for num1 as a string and makes sure it is a valid float
-    while (true) {
+    while (true) 
+    {
         
         cout << "Please give the first number: ";
         getline(cin >> ws, input);
@@ -121,7 +125,8 @@ float main() {
     }
     
     //loops till a valid input is given for choice
-    while (true) {
+    while (true) 
+    {
         
         //takes input of choice
         cout << "What kind of calculation would you like to do? (Add, Subtract, Multiply or Divide) ";
@@ -129,12 +134,14 @@ float main() {
         getline(cin, choice);
 
         //makes choice all lowercase, which stops any errors from not having proper case
-        for (int i = 0; i < choice.length(); i++) {
+        for (int i = 0; i < choice.length(); i++) 
+        {
             choice[i] = tolower(choice[i]);
         }
 
         //if choice is add or plus(+), it passes the num1 and num2 to A to be used in the add class, before executing ans() function
-        if (choice == "add" or choice == "+") {
+        if (choice == "add" or choice == "+") 
+        {
             A.num1 = num1;
             A.num2 = num2;
             float answer = A.ans();
@@ -143,7 +150,8 @@ float main() {
         }
 
         //if choice is subtract or minus(-), it passes the num1 and num2 to S to be used in the sub class, before executing ans() function
-        else if (choice == "substract" or choice == "-") {
+        else if (choice == "subtract" or choice == "-") 
+        {
             S.num1 = num1;
             S.num2 = num2;
             float answer = S.ans();
@@ -152,7 +160,8 @@ float main() {
         }
 
         //if choice is multiply or asterisks(*), it passes the num1 and num2 to M to be used in the mul class, before executing ans() function
-        else if (choice == "multiply" or choice == "*") {
+        else if (choice == "multiply" or choice == "*") 
+        {
             M.num1 = num1;
             M.num2 = num2;
             float answer = M.ans();
@@ -161,12 +170,24 @@ float main() {
         }
 
         //if choice is divide or forward slash(/), it passes the num1 and num2 to D to be used in the divi class, before executing ans() function
-        else if (choice == "divide" or choice == "/") {
-            D.num1 = num1;
-            D.num2 = num2;
-            float answer = D.ans();
-            cout << answer;
-            break;
+        else if (choice == "divide" or choice == "/") 
+        {
+
+            //if num2 is zero, it tells you that you cannot divide
+            if (num2==0)
+            {
+                cout << "Cannot divide by 0, answer undefined";
+                break;
+            }
+
+            else 
+            {
+                D.num1 = num1;
+                D.num2 = num2;
+                float answer = D.ans();
+                cout << answer;
+                break;
+            }
         }
 
         //if choice is invalid, it repeats the loop till a valid choice is given by the user
